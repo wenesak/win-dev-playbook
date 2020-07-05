@@ -1,0 +1,99 @@
+---
+- name: Configure windows development environment from WSL 2.
+  hosts: all
+  become: true
+  vars_files:
+    ../vars/vars.yml
+  tasks:
+  - name: Update apt-get repo and cache
+    apt: update_cache=yes force_apt_get=yes cache_valid_time=3600
+  - name: Upgrade all apt packages
+    apt: upgrade=dist force_apt_get=yes
+  - name: Autoremove packages no longer needed.
+    apt: autoremove=yes
+  - name: Autoclean temporary package data.
+    apt: autoclean=yes
+  - name: Check if a reboot is needed for Debian and Ubuntu boxes
+    stat: path=/var/run/reboot-required get_md5=no
+    register: reboot_required_file
+  - name: Reboot the Debian or Ubuntu server
+    reboot:
+      msg: "Reboot initiated by Ansible due to kernel updates"
+      connect_timeout: 5
+      reboot_timeout: 300
+      pre_reboot_delay: 0
+      post_reboot_delay: 30
+      test_command: uptime
+    when: reboot_required_file.stat.exists
+  - name: Install  Software with apt.
+    apt:
+      name:
+      - git
+      - ctags
+      - neovim
+      - tmux
+      - curl
+      - jq
+      - wget
+      - sed
+      - nmap
+      - net-tools
+      - telnet
+      - htop
+      - p7zip-full
+      - aptitude
+      - ranger
+      - rake
+      - tree
+      - fd-find
+      - fzf
+      - groff
+      state: latest
+  - name: Uninstall packages
+    apt:
+      name:
+      - vim
+      state: absent
+  - name: NodeJS
+    apt:
+      name: nodejs
+      state: latest
+  - name: Global install npm editorconfig package.
+    npm:
+      name: editorconfig
+      state: latest
+      global: yes
+  - name: Global install npm eclint package.
+    npm:
+      name: eclint
+      state: latest
+      global: yes
+  - name: 'Install Python 3 and pip 3.'
+    apt:
+      name:
+      - python3
+      - python3-pip
+      - libffi-dev
+      state: latest
+  - name: Install or update required python packages
+    pip:
+      name:
+      - pip
+      - ansible
+      - yamllint
+      - ansible-lint
+      - setuptools
+      - molecule
+      - 'molecule[docker]'
+      - qmk
+      state: latest
+  - name: Create systemd directory
+    file:
+      path: /sys/fs/cgroup/systemd
+      state: directory
+      owner: root
+      group: root
+      mode: 0775
+      # not idempotent need to fix this one and WSL only.
+      # - name: 'Mount systemd directory for use with docker containers'
+      #  cmd: 'sudo mount -t cgroup -o none,name=systemd cgroup /sys/fs/cgroup/systemd

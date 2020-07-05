@@ -1,0 +1,22 @@
+---
+extends: default
+rules:
+  line-length:
+    max: 120
+    level: error
+  truthy:
+    allowed-values:
+    - 'on'
+    - 'off'
+    - 'true'
+    - 'false'
+    - 'yes'
+    - 'no'
+    level: error
+  indentation:
+    spaces: 2
+    indent-sequences: false
+  empty-lines:
+    max: 0
+    max-end: 1
+
