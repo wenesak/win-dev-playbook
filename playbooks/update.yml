@@ -48,6 +48,12 @@
       - fd-find
       - fzf
       - groff
+      - zathura
+      - zathura-cb
+      - zathura-djvu
+      - zathura-pdf-mupdf
+      - zathura-pdf-poppler
+      - zathura-ps
       state: latest
   - name: Uninstall packages
     apt:
