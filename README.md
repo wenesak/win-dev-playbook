@@ -10,4 +10,4 @@ so I still have some manual installation steps, but at least it's  going to be a
 This is a work in progress, and is mostly a means for me to document my current Windows's /WSL setup.
 I'll be evolving this set of playbooks over time.
 
-Looking for a [mac-dev-playbook](https://github.com/geerlingguy/mac-dev-playbook?)
+For a Mac? See: [mac-dev-playbook](https://github.com/geerlingguy/mac-dev-playbook)
