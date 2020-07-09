@@ -51,7 +51,6 @@
       - zathura
       - zathura-cb
       - zathura-djvu
-      - zathura-pdf-mupdf
       - zathura-pdf-poppler
       - zathura-ps
       state: latest
@@ -100,6 +99,5 @@
       owner: root
       group: root
       mode: 0775
-      # not idempotent need to fix this one and WSL only.
-      # - name: 'Mount systemd directory for use with docker containers'
-      #  cmd: 'sudo mount -t cgroup -o none,name=systemd cgroup /sys/fs/cgroup/systemd
+  - name: 'Mount systemd directory for use with docker containers'
+    command: 'sudo mount -t cgroup -o none,name=systemd cgroup /sys/fs/cgroup/systemd'
