@@ -28,6 +28,8 @@
   - name: Install  Software with apt.
     apt:
       name:
+      - rsync
+      - ssh
       - git
       - ctags
       - neovim
@@ -42,17 +44,13 @@
       - htop
       - p7zip-full
       - aptitude
-      - ranger
       - rake
       - tree
       - fd-find
       - fzf
       - groff
-      - zathura
-      - zathura-cb
-      - zathura-djvu
-      - zathura-pdf-poppler
-      - zathura-ps
+      - vifm
+      - zsh
       state: latest
   - name: Uninstall packages
     apt:
@@ -61,7 +59,9 @@
       state: absent
   - name: NodeJS
     apt:
-      name: nodejs
+      name: 
+        - nodejs
+        - npm
       state: latest
   - name: Global install npm editorconfig package.
     npm:
@@ -71,6 +71,11 @@
   - name: Global install npm eclint package.
     npm:
       name: eclint
+      state: latest
+      global: yes
+  - name: Global install npm neovim package.
+    npm:
+      name: neovim
       state: latest
       global: yes
   - name: 'Install Python 3 and pip 3.'
@@ -92,12 +97,24 @@
       - 'molecule[docker]'
       - qmk
       state: latest
-  - name: Create systemd directory
+  - name: Create a directory if it does not exist
     file:
-      path: /sys/fs/cgroup/systemd
+      path: /home/kruse/.local/share/nvim/site/autoload
       state: directory
-      owner: root
-      group: root
-      mode: 0775
-  - name: 'Mount systemd directory for use with docker containers'
-    command: 'sudo mount -t cgroup -o none,name=systemd cgroup /sys/fs/cgroup/systemd'
+      mode: '0755'
+    become: false
+  - name: Install vim plug
+    get_url:
+      url: https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+      dest: /home/kruse/.local/share/nvim/site/autoload/plug.vim
+      mode: '0644'
+    become: false
+#  - name: Create systemd directory
+#    file:
+#      path: /sys/fs/cgroup/systemd
+#      state: directory
+#      owner: root
+#      group: root
+#      mode: 0775
+#  - name: 'Mount systemd directory for use with docker containers'
+#    command: 'sudo mount -t cgroup -o none,name=systemd cgroup /sys/fs/cgroup/systemd'
