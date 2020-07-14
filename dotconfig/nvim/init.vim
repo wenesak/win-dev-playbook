@@ -1,6 +1,6 @@
 "" My Neovim settings.
 "" I am not an export and just trying to set it up unplugged.
-"" I am both old new and old to Vim but started learning it for real in 202.
+"" I am both new and old to Vim but started learning it for real in 202.
 "" I Started with SpaceVIM at first, but it was not fast enough for me.
 "" I restarted configuring vim and growing both my dotfiles and vim from
 "" scratch.
@@ -130,9 +130,9 @@ set splitright
 ""
 set mouse=a
 
-
 "" 
 "" Tabs. This breaks <CONTROL><I>, I know.
+"" Open new tab with Shift T.
 ""
 nnoremap <Tab> gt
 nnoremap <S-Tab> gT
@@ -147,5 +147,87 @@ endif
 
 ""
 "" Clean highlights with <LEADER>/
+"" No longer do /zz or search anything else that does not exist to get rid of
+"" the highlighting.
 ""
 nnoremap <silent> <leader>/ :noh<cr>
+
+""
+"" Set scrollofset to 5
+"" This makes zt/zb not go all the way to top or bottom but 5 lines from it.
+""
+set scrolloff=5
+
+""
+"" Search mappings: These will make it so that going to the next one in a
+"" search will center on the line it's found in.
+""
+nnoremap n nzzzv
+nnoremap N Nzzzv
+
+""
+"" Abbreviations for common casing mistakes.
+""
+cnoreabbrev W! w!
+cnoreabbrev Q! q!
+cnoreabbrev Qall! qall!
+cnoreabbrev Wq wq
+cnoreabbrev Wa wa
+cnoreabbrev wQ wq
+cnoreabbrev WQ wq
+cnoreabbrev W w
+cnoreabbrev Q q
+cnoreabbrev Qall qall
+
+augroup highlightYankedText
+    autocmd!
+    autocmd TextYankPost * call FlashYankedText(deepcopy(v:event))
+augroup END
+
+function! s:DeleteTemporaryMatch(timerId)
+    while !empty(s:yankedTextMatches)
+        let match = remove(s:yankedTextMatches, 0)
+        let windowID = match[0]
+        let matchID = match[1]
+
+        try
+            call matchdelete(matchID)
+        endtry
+    endwhile
+endfunction
+
+function! FlashYankedText(event)
+    " Don't highlight if the last command was not a yank
+    if (a:event.operator != 'y')
+        return
+    endif
+
+    if (!exists('s:yankedTextMatches'))
+        let s:yankedTextMatches = []
+    endif
+
+    let window = winnr()
+
+    " Handle case of visual block using one match by line
+    if (len(a:event.regtype) > 0 && a:event.regtype[0] == "\<C-V>")
+        let lineStart = line("'<")
+        let lineStop = line("'>")
+        let columnStart = col("'<")
+        let columnStop = col("'>")
+
+        " For each line in the block selection create aattern using the first
+        " and last column
+        "         " Theattern looks like this:
+        "   \%Xl\%Yc.*\%Zc
+        " Where X is the line, Y the first column and Z the last column
+        for line in range(lineStart, lineStop)
+            let matchId = matchadd(get(g:, 'FYT_highlight_group', 'IncSearch'), "\\%" . line . "l\\%" . columnStart . "c.*\\%" . columnStop . "c")
+            call add(s:yankedTextMatches, [window, matchId])
+        endfor
+    else " Other visual types
+        let matchId = matchadd(get(g:, 'FYT_highlight_group', 'IncSearch'), ".\\%>'\\[\\_.*\\%<']..")
+        call add(s:yankedTextMatches, [window,matchId])
+    endif
+
+    call timer_start(get(g:, 'FYT_flash_time', 500), function('<SID>DeleteTemporaryMatch'))
+endfunction
