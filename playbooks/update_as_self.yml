@@ -1,0 +1,29 @@
+---
+- name: Things to install and configure mainly as myself.
+  hosts: localhost
+  become: false
+  vars:
+    the_user: "{{ ansible_user_id }}"
+  tasks:
+  - name: Install or update required python packages
+    pip:
+      name:
+      - pip
+      - ansible
+      - yamllint
+      - ansible-lint
+      - setuptools
+      - molecule
+      - 'molecule[docker]'
+      - qmk
+      state: latest
+  - name: Create ~/.cache/zsh directory
+    file:
+      path: /home/kruse/.cache/zsh/
+      state: directory
+      mode: '0755'
+  - name: change user shell to zsh 
+    become: yes
+    user:
+      name: "{{ the_user }}"
+      shell: /usr/bin/zsh
