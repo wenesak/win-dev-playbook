@@ -1,6 +1,6 @@
 ---
 - name: Configure windows development environment from WSL 2.
-  hosts: all
+  hosts: wsl
   become: true
   vars_files:
     ../vars/vars.yml
@@ -51,6 +51,7 @@
       - groff
       - vifm
       - zsh
+      - man
       state: latest
   - name: Uninstall packages
     apt:

@@ -104,12 +104,15 @@ nnoremap <silent> <Leader>n :call CycleNumbering() <CR>
 
 ""
 "" Sensible maping for navigating through splits.
-"" No <CONTROLL><W> needed, Just <CONTROL> hjkl will do.
+"" No <CONTROL><W> needed, Just <Control> hjkl will do.
 ""
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
+if has('nvim')
+  " Normal mode:
+  nnoremap <C-h> <c-w>h
+  nnoremap <C-j> <c-w>j
+  nnoremap <C-k> <c-w>k
+  nnoremap <C-l> <c-w>l
+endif
 
 ""
 "" Open horizontal and vertical split with leader h and leader v.
@@ -231,3 +234,35 @@ function! FlashYankedText(event)
 
     call timer_start(get(g:, 'FYT_flash_time', 500), function('<SID>DeleteTemporaryMatch'))
 endfunction
+
+" Terminal Function
+let g:term_buf = 0
+let g:term_win = 0
+function! TermToggle(height)
+    if win_gotoid(g:term_win)
+        hide
+    else
+        botright new
+        exec "resize " . a:height
+        try
+            exec "buffer " . g:term_buf
+        catch
+            call termopen($SHELL, {"detach": 0})
+            let g:term_buf = bufnr("")
+            set nonumber
+            set norelativenumber
+            set signcolumn=no
+        endtry
+        startinsert!
+        let g:term_win = win_getid()
+    endif
+endfunction
+
+" Toggle terminal on/off (neovim)
+nnoremap <silent> <A-t> :call TermToggle(12)<CR>
+inoremap <silent> <A-t> <Esc>:call TermToggle(12)<CR>
+tnoremap <silent> <A-t> <C-\><C-n>:call TermToggle(12)<CR>
+
+" Terminal go back to normal mode
+tnoremap <Esc> <C-\><C-n>
+tnoremap :q! <C-\><C-n>:q!<CR>

@@ -1,6 +1,6 @@
 ---
 - name: Things to install and configure mainly as myself.
-  hosts: localhost
+  hosts: wsl
   become: false
   vars:
     the_user: "{{ ansible_user_id }}"

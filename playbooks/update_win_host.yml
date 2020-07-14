@@ -1,0 +1,17 @@
+---
+- name: Update windows host.
+  hosts: windows
+  tasks:
+  - name: Install Windows updates
+    win_updates:
+  - name: Upgrade installed packages
+    win_chocolatey:
+      name: all
+      state: latest
+  - name: Install git
+    win_chocolatey:
+      name: 
+       - git
+       - googlechrome
+       - firefox
+      state: latest
