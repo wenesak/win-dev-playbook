@@ -62,3 +62,7 @@ fe() {find . \( ! -regex '.*/\..*' \) -type f | fzf --preview 'bat --style=numbe
 fp() {find . \( ! -regex '.*/\..*' \) -type f | fzf --preview 'bat --style=numbers --color=always {}' | xargs -r $PAGER}
 fcd() {cd `find . \( ! -regex '.*/\..*' \) -type d | fzf`}
 ms() {apropos .| fzf --preview 'echo {}| awk "{print $1}"| xargs man' | awk '{print $1}' | xargs man}
+if type rg &> /dev/null; then
+  export FZF_DEFAULT_COMMAND='rg --files'
+  export FZF_DEFAULT_OPTS='-m --height 50% --border'
+fi

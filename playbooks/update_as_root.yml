@@ -25,6 +25,16 @@
       post_reboot_delay: 30
       test_command: uptime
     when: reboot_required_file.stat.exists
+  - name: Import YARN APT key
+    apt_key:
+      url: https://dl.yarnpkg.com/debian/pubkey.gpg
+      state: present
+  - name: Install YARN APT repo
+    apt_repository:
+      repo: "deb https://dl.yarnpkg.com/debian/ stable main"
+      filename: "yarn"
+      state: present
+      update_cache: yes
   - name: Install  Software with apt.
     apt:
       name:
@@ -48,10 +58,14 @@
       - tree
       - fd-find
       - fzf
+      - ripgrep
       - groff
       - vifm
       - zsh
       - man
+      - openjdk-11-jdk-headless
+      - maven
+      - yarn
       state: latest
   - name: Uninstall packages
     apt:
