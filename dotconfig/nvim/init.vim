@@ -1,7 +1,7 @@
 scriptencoding utf-8
 "" My Neovim settings.
-"" I am not an export and just trying to set it up unplugged.
-"" I am both new and old to Vim but started learning it for real in 202.
+"" I am not an expert and just trying to set it up unplugged.
+"" I am both new and old to Vim but started learning it for real in 2020.
 "" I Started with SpaceVIM at first, but it was not fast enough for me.
 "" I restarted configuring vim and growing both my dotfiles and vim from
 "" scratch.
