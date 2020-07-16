@@ -29,7 +29,7 @@ endif
 if exists('$SUDO_USER')
   set noswapfile                                    " Don't create root-owned files.
 else
-  set directory=~/.config/share/nvim/tmp/swap//     " Keep swap files out of the way.
+  set directory=~/.local/share/nvim/tmp/swap//     " Keep swap files out of the way.
   set directory+=.
 endif
 
@@ -37,7 +37,7 @@ if has('persistent_undo')
   if exists('$SUDO_USER')
     set noundofile                                  " Don't create root-owned files.
   else
-    set undodir=~/.config/share/nvim/tmp/undo       " Keep undo files out of the way.
+    set undodir=~/.local/share/nvim/tmp/undo       " Keep undo files out of the way.
     set undodir+=.
     set undofile                                    " Actually use undo files.
   endif
