@@ -16,7 +16,13 @@
       - molecule
       - 'molecule[docker]'
       - qmk
+      - docker-compose
+      - flake8
+      - autoflake
+      - isort
+      - coverage
       - pynvim
+      - jmespath
       state: latest
   - name: Create ~/.cache/zsh directory
     file:

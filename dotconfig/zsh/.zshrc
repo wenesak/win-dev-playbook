@@ -67,3 +67,5 @@ if type rg &> /dev/null; then
   export FZF_DEFAULT_OPTS='-m --height 50% --border'
 fi
 
+export MOLECULE_DISTRO=debian10
+export ANSIBLE_VAULT_PASSWORD_FILE=~/.vault_pass.txt
