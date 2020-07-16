@@ -278,7 +278,7 @@ xnoremap <silent> K :call wincent#mappings#visual#move_up()<CR>
 xnoremap <silent> J :call wincent#mappings#visual#move_down()<CR>
 
 let mapleader="\<Space>"
-let maplocalleader="\\"
+let maplocalleader=","
 
 
 function ShowSpaces(...)
@@ -540,6 +540,12 @@ set spellfile=~/.config/nvim/spell/en.utf-8.add
 
 call plug#begin(stdpath('data'))
 Plug 'tpope/vim-fugitive'
+Plug 'shumphrey/fugitive-gitlab.vim'
+Plug 'tpope/vim-rhubarb'
+Plug 'tpope/vim-markdown'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-commentary'
 Plug 'preservim/nerdtree'
 Plug 'morhetz/gruvbox'
 Plug 'airblade/vim-gitgutter'
@@ -547,25 +553,10 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'junegunn/fzf'
 Plug 'rhysd/vim-grammarous'
-Plug 'neomake/neomake'
-Plug 'autozimu/LanguageClient-neovim', {
-    \ 'branch': 'next',
-    \ 'do': 'bash install.sh',
-    \ }
-Plug 'ncm2/ncm2'
-Plug 'roxma/nvim-yarp'
-Plug 'ncm2/ncm2-bufword'
-Plug 'ncm2/ncm2-path'
-Plug 'ncm2/ncm2-tagprefix'
-Plug 'ncm2/ncm2-ultisnips'
-Plug 'ncm2/ncm2-markdown-subscope'
-Plug 'ncm2/ncm2-rst-subscope'
-Plug 'vim-test/vim-test'
-Plug 'neoclide/coc.nvim'
-Plug 'neoclide/coc-git'
-Plug 'neoclide/coc-java'
-Plug 'neoclide/coc-json'
+Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 call plug#end()
+let deoplete#enable_at_startup = 1
 
 set background=dark
 colorscheme gruvbox
@@ -576,10 +567,9 @@ let g:grammarous#default_comments_only_filetypes = {
             \ '*' : 1, 'help' : 0, 'markdown' : 0,
             \ }
 
-let g:grammarous#use_vim_spelllang = 0
 let g:grammarous#enable_spell_check = 1
 let g:grammarous#lang = 'en'
-noremap <leader><F2> :NERDTreeToggle<CR>
+noremap <F2> :NERDTreeToggle<CR>
 noremap <leader>f :FZF<CR>
 
 " air-line
@@ -611,34 +601,3 @@ let g:airline_right_alt_sep = ''
 let g:airline_symbols.branch = ''
 let g:airline_symbols.readonly = ''
 let g:airline_symbols.linenr = ''
-let g:LanguageClient_autoStart = 1
-" Use the location list instead of the quickfix list to show linter warnings
-let g:LanguageClient_diagnosticsList = "Location"
-let g:LanguageClient_rootMarkers = {
-    \ 'java': ['.git']
-    \ }
-let g:LanguageClient_serverCommands = {
-    \ 'java': ['java-lsp.sh']
-    \ }
-
-set hidden
-nmap <F5> <Plug>(lcn-menu)
-" Or map each action separately
-nmap <silent>K <Plug>(lcn-hover)
-nmap <silent>gd <Plug>(lcn-definition)
-nmap <silent><F3> <Plug>(lcn-rename)
-nmap <silent>gr <Plug>(lcn-references)
-nmap <silent><leader>fs <Plug>(lcn-documentSymbol)
-nmap <silent>crr <Plug>(lcn-rename)
-nmap <silent><a-CR> <Plug> (lcn-codeAction)
-
-nmap <silent>t<C-n> :TestNearest<CR>
-nmap <silent>t<C-f> :TestFile<CR>
-nmap <silent>t<C-s> :TestSuite<CR>
-nmap <silent>t<C-l> :TestLast<CR>
-nmap <silent>t<C-g> :TestVisit<CR>
-
-let test#strategy = "neovim"
-let g:neomake_open_list = 2
-let lsp_log_verbose=1
-let lsp_log_file='/tmp/lsp.log'

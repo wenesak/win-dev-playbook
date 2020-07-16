@@ -4,8 +4,6 @@
   become: false
   vars:
     the_user: "{{ ansible_user_id }}"
-  roles:
-  - lang-java
   tasks:
   - name: Install or update required python packages
     pip:
@@ -18,10 +16,11 @@
       - molecule
       - 'molecule[docker]'
       - qmk
+      - pynvim
       state: latest
   - name: Create ~/.cache/zsh directory
     file:
-      path: /home/kruse/.cache/zsh/
+      path: /home/kruse/.cache/zsh
       state: directory
       mode: '0700'
   - name: change user shell to zsh 
@@ -29,6 +28,11 @@
     user:
       name: "{{ the_user }}"
       shell: /usr/bin/zsh
+  - name: Create ~/.local/share/nvim/shada
+    file:
+      path: /home/kruse/.local/share/nvim/shada
+      state: directory
+      mode: '0700'
   - name: Create ~/.local/share/nvim/tmp
     file:
       path: /home/kruse/.local/share/nvim/tmp
@@ -46,6 +50,6 @@
       mode: '0700'
   - name: Create ~/.local/share/nvim/tmp/undo
     file:
-      path: /home/kruse/.local/share/nvim/tmp/uno
+      path: /home/kruse/.local/share/nvim/tmp/undo
       state: directory
       mode: '0700'
