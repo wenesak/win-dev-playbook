@@ -25,10 +25,23 @@
       post_reboot_delay: 30
       test_command: uptime
     when: reboot_required_file.stat.exists
+  - name: Import Elastic APT key
+    apt_key:
+      url: https://artifacts.elastic.co/GPG-KEY-elasticsearch
+      state: present
   - name: Import YARN APT key
     apt_key:
       url: https://dl.yarnpkg.com/debian/pubkey.gpg
       state: present
+  - name: Import Azul APT key
+    apt_key:
+      url: "https://assets.azul.com/files/0xB1998361219BD9C9.txt"
+      id: "0xB1998361219BD9C9"
+  - name: Install Elastic repo
+    apt_repository:
+      repo: "deb https://artifacts.elastic.co/packages/7.x/apt stable main"
+      state: present
+      update_cache: yes
   - name: Install YARN APT repo
     apt_repository:
       repo: "deb https://dl.yarnpkg.com/debian/ stable main"
@@ -66,6 +79,7 @@
       - openjdk-11-jdk-headless
       - maven
       - yarn
+      - logstash
       state: latest
   - name: Uninstall packages
     apt:
