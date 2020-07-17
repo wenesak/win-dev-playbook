@@ -11,6 +11,7 @@ bindkey -v
 # Keep 1000 lines of history within the shell and save it to ~/.zsh_history:
 export HISTFILESIZE=1000000000
 export HISTSIZE=1000000000
+export SAVEHIST=1000000000
 export HISTFILE="${HOME}/.local/share/zsh/history"
 # Record history at once and not after shell exit
 setopt INC_APPEND_HISTORY
