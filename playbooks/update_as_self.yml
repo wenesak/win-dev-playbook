@@ -59,3 +59,8 @@
       path: /home/kruse/.local/share/nvim/tmp/undo
       state: directory
       mode: '0700'
+  - name: Create ~/.local/share/zsh
+    file:
+      path: /home/kruse/.local/share/zsh
+      state: directory
+      mode: '0700'
