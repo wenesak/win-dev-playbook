@@ -1,4 +1,4 @@
-# Window
+# Win dev playbook
 
 This playbook installs and configures most of the software I use on my Windows machine and
 my WSL development environtment on that machine. It uses Ansible from within a WSL environment to

@@ -70,11 +70,11 @@ if exists('s:viminfo')
     " - f0 don't store file marks
     " - n: store in ~/.vim/tmp
     "
-    execute 'set ' . s:viminfo . "='0,<0,f0,n~/.local/share/nvim/tmp/" . s:viminfo
+    execute 'set ' . s:viminfo . "='100,n$HOME/.local/share/nvim/files/" . s:viminfo
 
-    if !empty(glob('~/.local/share/nvim/tmp/' . s:viminfo))
-      if !filereadable(expand('~/.local/share/nvim/tmp/' . s:viminfo))
-        echoerr 'warning: ~/.local/share/vim/tmp/' . s:viminfo . ' exists but is not readable'
+    if !empty(glob('~/.local/share/nvim/files/' . s:viminfo))
+      if !filereadable(expand('~/.local/share/nvim/files/' . s:viminfo))
+        echoerr 'warning: ~/.local/share/vim/files/' . s:viminfo . ' exists but is not readable'
       endif
     endif
   endif
@@ -278,9 +278,9 @@ xnoremap <silent> K :call wincent#mappings#visual#move_up()<CR>
 xnoremap <silent> J :call wincent#mappings#visual#move_down()<CR>
 
 let g:mapleader = "\<Space>"
-let g:maplocalleader = ','
+let g:maplocalleader = '\\'
 nnoremap <silent> <leader>      :<c-u>WhichKey '<Space>'<CR>
-nnoremap <silent> <localleader> :<c-u>WhichKey  ','<CR>
+nnoremap <silent> <localleader> :<c-u>WhichKey  '\\'<CR>
 
 function ShowSpaces(...)
   let @/='\v(\s+$)|( +\ze\t)'
@@ -515,7 +515,7 @@ Plug 'tpope/vim-markdown'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
-Plug 'tpope/unblevable/quick-scope'
+Plug 'unblevable/quick-scope'
 Plug 'justinmk/vim-sneak'
 Plug 'preservim/nerdtree'
 Plug 'morhetz/gruvbox'
@@ -528,7 +528,7 @@ Plug 'rhysd/vim-grammarous'
 Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'voldikss/vim-floaterm'
-Plug 'mhinz/vim-startifjustinmk/vim-sneak'
+Plug 'mhinz/vim-startify'
 Plug 'liuchengxu/vim-which-key', { 'on': ['WhichKey', 'WhichKey!'] }
 call plug#end()
 let deoplete#enable_at_startup = 1
@@ -582,3 +582,5 @@ au FileType markdown vmap <Leader>' :EasyAlign*<Bar><Enter>
 
 nnoremap <silent><F12> :FloatermToggle<cr>
 tnoremap <silent><F12> <C-\><C-n>:FloatermToggle<cr>
+
+let g:sneak#label = 1
