@@ -180,7 +180,7 @@ endif
 "highlight LineNr ctermfg=darkgrey guifg=#bbbbbb
 
 set scrolloff=5                       " start scrolling 3 lines before edge of viewport
-set shell=sh                          " shell to use for `!`, `:!`, `system()` etc.
+set shell=zsh                         " shell to use for `!`, `:!`, `system()` etc.
 set noshiftround                      " don't always indent by multiple of shiftwidth
 set shiftwidth=2                      " spaceser tab (when shifting)
 set shortmess+=A                      " ignore annoying swapfile messages
@@ -277,9 +277,10 @@ xnoremap <C-l> <C-w>l
 xnoremap <silent> K :call wincent#mappings#visual#move_up()<CR>
 xnoremap <silent> J :call wincent#mappings#visual#move_down()<CR>
 
-let mapleader="\<Space>"
-let maplocalleader=","
-
+let g:mapleader = "\<Space>"
+let g:maplocalleader = ','
+nnoremap <silent> <leader>      :<c-u>WhichKey '<Space>'<CR>
+nnoremap <silent> <localleader> :<c-u>WhichKey  ','<CR>
 
 function ShowSpaces(...)
   let @/='\v(\s+$)|( +\ze\t)'
@@ -378,6 +379,7 @@ if has('nvim')
   nnoremap <C-j> <c-w>j
   nnoremap <C-k> <c-w>k
   nnoremap <C-l> <c-w>l
+  nnoremap <leader>= <c-w>=
 endif
 
 ""
@@ -494,39 +496,6 @@ function! FlashYankedText(event)
     call timer_start(get(g:, 'FYT_flash_time', 500), function('<SID>DeleteTemporaryMatch'))
 endfunction
 
-" Terminal Function
-let g:term_buf = 0
-let g:term_win = 0
-function! TermToggle(height)
-    if win_gotoid(g:term_win)
-        hide
-    else
-        botright new
-        exec "resize " . a:height
-        try
-            exec "buffer " . g:term_buf
-        catch
-            call termopen($SHELL, {"detach": 0})
-            let g:term_buf = bufnr("")
-            set nonumber
-            set norelativenumber
-            set signcolumn=no
-        endtry
-        startinsert!
-        let g:term_win = win_getid()
-    endif
-endfunction
-
-" Toggle terminal on/off (neovim)
-nnoremap <silent> <A-t> :call TermToggle(12)<CR>
-inoremap <silent> <A-t> <Esc>:call TermToggle(12)<CR>
-tnoremap <silent> <A-t> <C-\><C-n>:call TermToggle(12)<CR>
-
-" Terminal go back to normal mode
-tnoremap <Esc> <C-\><C-n>
-tnoremap :q! <C-\><C-n>:q!<CR>
-
-
 if filereadable('/usr/local/bin/python3')
   " Avoid search, speeding up start-up.
   let g:python3_host_prog='/usr/local/bin/python3'
@@ -546,6 +515,8 @@ Plug 'tpope/vim-markdown'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
+Plug 'tpope/unblevable/quick-scope'
+Plug 'justinmk/vim-sneak'
 Plug 'preservim/nerdtree'
 Plug 'morhetz/gruvbox'
 Plug 'airblade/vim-gitgutter'
@@ -556,6 +527,9 @@ Plug 'junegunn/vim-easy-align'
 Plug 'rhysd/vim-grammarous'
 Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'voldikss/vim-floaterm'
+Plug 'mhinz/vim-startifjustinmk/vim-sneak'
+Plug 'liuchengxu/vim-which-key', { 'on': ['WhichKey', 'WhichKey!'] }
 call plug#end()
 let deoplete#enable_at_startup = 1
 
@@ -571,8 +545,7 @@ let g:grammarous#default_comments_only_filetypes = {
 let g:grammarous#enable_spell_check = 1
 let g:grammarous#lang = 'en'
 noremap <F2> :NERDTreeToggle<CR>
-noremap <leader>f :FZF<CR>
-
+noremap <silent><leader>f :FloatermNew --height=0.9 --width=0.8 --wintype=floating --name=fzf fzf<CR> 
 " air-line
 let g:airline_powerline_fonts = 1
 
@@ -605,3 +578,7 @@ let g:airline_symbols.linenr = ''
 
 " Align GitHub-flavored Markdown tables
 au FileType markdown vmap <Leader>' :EasyAlign*<Bar><Enter>
+
+
+nnoremap <silent><F12> :FloatermToggle<cr>
+tnoremap <silent><F12> <C-\><C-n>:FloatermToggle<cr>
