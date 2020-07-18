@@ -37,7 +37,7 @@ if has('persistent_undo')
   if exists('$SUDO_USER')
     set noundofile                                  " Don't create root-owned files.
   else
-    set undodir=~/.local/share/nvim/tmp/undo       " Keep undo files out of the way.
+    set undodir=~/.local/share/nvim/tmp/undo        " Keep undo files out of the way.
     set undodir+=.
     set undofile                                    " Actually use undo files.
   endif
@@ -278,9 +278,8 @@ xnoremap <silent> K :call wincent#mappings#visual#move_up()<CR>
 xnoremap <silent> J :call wincent#mappings#visual#move_down()<CR>
 
 let g:mapleader = "\<Space>"
-let g:maplocalleader = '\\'
 nnoremap <silent> <leader>      :<c-u>WhichKey '<Space>'<CR>
-nnoremap <silent> <localleader> :<c-u>WhichKey  '\\'<CR>
+nnoremap <silent> <localleader> :<c-u>WhichKey  '<BackSpace'<CR>
 
 function ShowSpaces(...)
   let @/='\v(\s+$)|( +\ze\t)'
@@ -400,7 +399,7 @@ set mouse=a
 ""
 nnoremap <Tab> gt
 nnoremap <S-Tab> gT
-nnoremap <silent> <S-t> :tabnew<CR>
+nnoremap <silent> <M-t> :tabnew<CR>
 
 ""
 "" Integrate with OS clipboard, if possible.
@@ -515,8 +514,8 @@ Plug 'tpope/vim-markdown'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
+Plug 'Yggdroot/indentLine'
 Plug 'unblevable/quick-scope'
-Plug 'justinmk/vim-sneak'
 Plug 'preservim/nerdtree'
 Plug 'morhetz/gruvbox'
 Plug 'airblade/vim-gitgutter'
@@ -545,7 +544,8 @@ let g:grammarous#default_comments_only_filetypes = {
 let g:grammarous#enable_spell_check = 1
 let g:grammarous#lang = 'en'
 noremap <F2> :NERDTreeToggle<CR>
-noremap <silent><leader>f :FloatermNew --height=0.9 --width=0.8 --wintype=floating --name=fzf fzf<CR> 
+noremap <silent><leader>f :FloatermNew --height=0.9 --width=0.8 --wintype=floating --name=fzf fzf<CR>
+nnoremap <silent> <localleader>q :QuickScopeToggle<CR>
 " air-line
 let g:airline_powerline_fonts = 1
 
@@ -579,8 +579,62 @@ let g:airline_symbols.linenr = ''
 " Align GitHub-flavored Markdown tables
 au FileType markdown vmap <Leader>' :EasyAlign*<Bar><Enter>
 
-
 nnoremap <silent><F12> :FloatermToggle<cr>
 tnoremap <silent><F12> <C-\><C-n>:FloatermToggle<cr>
+nnoremap <silent><localleader>q :QuickScopeToggle<cr>
 
-let g:sneak#label = 1
+" Define mappings
+autocmd FileType denite call s:denite_my_settings()
+function! s:denite_my_settings() abort
+  nnoremap <silent><buffer><expr> <CR>
+  \ denite#do_map('do_action')
+  nnoremap <silent><buffer><expr> d
+  \ denite#do_map('do_action', 'delete')
+  nnoremap <silent><buffer><expr>
+  \ denite#do_map('do_action', 'preview')
+  nnoremap <silent><buffer><expr> q
+  \ denite#do_map('quit')
+  nnoremap <silent><buffer><expr> i
+  \ denite#do_map('open_filter_buffer')
+  nnoremap <silent><buffer><expr> <Space>
+  \ denite#do_map('toggle_select').'j'
+endfunction
+
+let s:hidden_all = 0
+function! ToggleHiddenAll()
+    if s:hidden_all  == 0
+        let s:hidden_all = 1
+        set noshowmode
+        set noruler
+        set laststatus=0
+        set noshowcmd
+        set nonumber
+        set norelativenumber
+        GitGutterDisable
+    else
+        let s:hidden_all = 0
+        set showmode
+        set ruler
+        set laststatus=2
+        set relativenumber
+        set number
+        GitGutterEnable
+    endif
+endfunction
+
+let s:hidden_command=0
+function! ToggleCommand()
+  if s:hidden_command == 0
+    let s:hidden_command = 1
+    set showcmd
+  else
+    let s:hidden_command = 0
+    set noshowcmd
+  endif
+endfunction
+
+
+nnoremap <silent><localleader>a :call ToggleHiddenAll()<CR>
+nnoremap <silent><localleader>k :call ToggleCommand()<CR>
+set noshowcmd
+set laststatus=2
