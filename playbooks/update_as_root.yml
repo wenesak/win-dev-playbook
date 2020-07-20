@@ -64,6 +64,7 @@
       - ssh
       - git
       - ctags
+      - cscope
       - neovim
       - tmux
       - curl

@@ -22,6 +22,8 @@
       - isort
       - coverage
       - pynvim
+      - nvr
+      - neovim-remote
       - jmespath
       state: latest
   - name: Create ~/.cache/zsh directory
