@@ -258,6 +258,7 @@ set laststatus=2
 scriptencoding utf-8
 " set leader key
 let g:mapleader = "\<Space>"
+let g:localleader = "\\"
 
 "set nowrap                              " Display long lines as just one line
 set encoding=utf-8                      " The encoding displayed

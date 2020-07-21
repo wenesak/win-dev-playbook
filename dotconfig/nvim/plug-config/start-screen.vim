@@ -28,7 +28,7 @@ function! StartifyEntryFormat()
 
 let g:startify_bookmarks = [
             \ { 'i': '~/.config/nvim/init.vim' },
-            \ { 'z': '~/.zshrc' },
+            \ { 'z': '~/.config/zsh/.zshrc' },
             \ ]
 
 let g:startify_enable_special = 0

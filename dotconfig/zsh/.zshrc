@@ -70,3 +70,6 @@ fi
 
 export MOLECULE_DISTRO=debian10
 export ANSIBLE_VAULT_PASSWORD_FILE=~/.vault_pass.txt
+source /usr/share/doc/fzf/examples/completion.zsh
+source /usr/share/doc/fzf/examples/key-bindings.zsh
+
