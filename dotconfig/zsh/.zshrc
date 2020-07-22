@@ -45,14 +45,21 @@ export VAGRANT_WSL_ENABLE_WINDOWS_ACCESS="1"
 export VAGRANT_DEFAULT_PROVIDER="virtualbox"
 export VAGRANT_WSL_WINDOWS_ACCESS_USER_HOME_PATH="/c/vagrant"
 
-fe() {find . \( ! -regex '.*/\..*' \) -type f | fzf --preview 'bat --style=numbers --color=always {}' | xargs -r $EDITOR}
-fp() {find . \( ! -regex '.*/\..*' \) -type f | fzf --preview 'bat --style=numbers --color=always {}' | xargs -r $PAGER}
-fcd() {cd `find . \( ! -regex '.*/\..*' \) -type d | fzf`}
-ms() {apropos .| fzf --preview 'echo {}| awk "{print $1}"| xargs man' | awk '{print $1}' | xargs man}
-if type rg &> /dev/null; then
-  export FZF_DEFAULT_COMMAND='rg --files'
-  export FZF_DEFAULT_OPTS='-m --height 50% --border'
-fi
+# Load plugins
+export ZPLUG_HOME=~/.local/share/zsh/zplug
+source $ZPLUG_HOME/init.zsh
+zplug "woefe/wbase.zsh"
+zplug "woefe/git-prompt.zsh", use:"{git-prompt.zsh,examples/wprompt.zsh}"
+zplug "junegunn/fzf", use:"shell/*.zsh"
+zplug "junegunn/fzf-bin", from:gh-r, as:command, rename-to:fzf,
+# use:"*linux*amd64*"
+zplug "sharkdp/fd", from:gh-r, as:command, rename-to:fd,
+# use:"*x86_64-unknown-linux-gnu.tar.gz"
+zplug "zsh-users/zsh-completions"
+zplug "zsh-users/zsh-autosuggestions"
+zplug "zsh-users/zsh-syntax-highlighting", defer:2
+zplug "zsh-users/zsh-history-substring-search", defer:3
+zplug load
 # Aliases
 alias la='ls -lah --color=auto'
 alias lh='ls -lh --color=auto'
@@ -80,25 +87,17 @@ bindkey '^f' autosuggest-accept
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=247'
 #
 # # fzf settings. Uses sharkdp/fd for a faster alternative to `find`.
-FZF_CTRL_T_COMMAND='fd --type f --hidden --exclude .git --exclude .cache'
-FZF_ALT_C_COMMAND='fd --type d --hidden --exclude .git'
+fe() {find . \( ! -regex '.*/\..*' \) -type f | fzf --preview 'bat --style=numbers --color=always {}' | xargs -r $EDITOR}
+fp() {find . \( ! -regex '.*/\..*' \) -type f | fzf --preview 'bat --style=numbers --color=always {}' | xargs -r $PAGER}
+fcd() {cd `find . \( ! -regex '.*/\..*' \) -type d | fzf`}
+ms() {apropos .| fzf --preview 'echo {}| awk "{print $1}"| xargs man' | awk '{print $1}' | xargs man}
+if type rg &> /dev/null; then
+  export FZF_DEFAULT_COMMAND='rg --files'
+  export FZF_DEFAULT_OPTS='-m --height 50% --border'
+fi
+FZF_CTRL_T_COMMAND='fdfind --type f --hidden --exclude .git --exclude .cache'
+FZF_ALT_C_COMMAND='fdfind --type d --hidden --exclude .git'
 #
-ZSH_THEME="gruvbox"
-# Load plugins
-export ZPLUG_HOME=~/.local/share/zsh/zplug
-source $ZPLUG_HOME/init.zsh
-zplug "woefe/wbase.zsh"
-zplug "woefe/git-prompt.zsh", use:"{git-prompt.zsh,examples/wprompt.zsh}"
-zplug "junegunn/fzf", use:"shell/*.zsh"
-zplug "junegunn/fzf-bin", from:gh-r, as:command, rename-to:fzf,
-# use:"*linux*amd64*"
-zplug "sharkdp/fd", from:gh-r, as:command, rename-to:fd,
-# use:"*x86_64-unknown-linux-gnu.tar.gz"
-zplug "zsh-users/zsh-completions"
-zplug "zsh-users/zsh-autosuggestions"
-zplug "zsh-users/zsh-syntax-highlighting", defer:2
-zplug "zsh-users/zsh-history-substring-search", defer:3
-zplug load
 # Keep 1000 lines of history within the shell and save it to ~/.zsh_history:
 export HISTFILESIZE=1000000000
 export HISTSIZE=1000000000
