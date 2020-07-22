@@ -1,2 +1,2 @@
 scriptencoding utf-8
-noremap <F5> :NERDTreeToggle<CR>
+noremap <silent><F5> :NERDTreeToggle<CR>
