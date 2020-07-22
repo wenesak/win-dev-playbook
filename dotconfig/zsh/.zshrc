@@ -103,11 +103,15 @@ export HISTFILESIZE=1000000000
 export HISTSIZE=1000000000
 export SAVEHIST=1000000000
 export HISTFILE="${HOME}/.local/share/zsh/history"
+DIRSTACKSIZE=${DIRSTACKSIZE:-20}
+dirstack_file=${dirstack_file:-${HOME}/.zdirs}
 # Record history at once and not after shell exit
 setopt INC_APPEND_HISTORY
 export HISTTIMEFORMAT="[%F %T] "
 # Record timestamps in history
 setopt EXTENDED_HISTORY
+DIRSTACKSIZE=${DIRSTACKSIZE:-20}
+dirstack_file=${dirstack_file:-${HOME}/.local/share/zsh/zdirs}
 
 # Use modern completion system
 autoload -Uz compinit
