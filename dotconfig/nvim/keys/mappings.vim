@@ -37,7 +37,7 @@ tnoremap <C-l> <C-\><C-N><C-w>l
 inoremap <C-h> <C-\><C-N><C-w>h
 inoremap <C-j> <C-\><C-N><C-w>j
 inoremap <C-k> <C-\><C-N><C-w>k
-  inoremap <C-l> <C-\><C-N><C-w>l
+ inoremap <C-l> <C-\><C-N><C-w>l
 tnoremap <Esc> <C-\><C-n>
 " Make all views about the same size
 nnoremap <Leader>= <C-w>=
@@ -46,11 +46,6 @@ nnoremap <Leader>= <C-w>=
 nnoremap <Leader>o o<Esc>^Da
 " Insert above  indented
 nnoremap <Leader>O O<Esc>^Da
-" Disable the arrow keys in normal mode.
-nnoremap <Down> <Nop>
-nnoremap <Left> <Nop>
-nnoremap <Right> <Nop>
-nnoremap <Up> <Nop>
 
 " Avoid unintentional switches to Ex mode.
 nnoremap Q <nop>
@@ -100,21 +95,21 @@ endif
 ""
 nnoremap <Tab> gt
 nnoremap <S-Tab> gT
-nnoremap <silent> <M-t> :tabnew<CR>
+nnoremap <silent><M-t> :tabnew<CR>
 
 " Control space wil move to next buffer.
-nnoremap <M-\> :bnext<CR>
+nnoremap <silent><M-\> :bnext<CR>
 " Shift space will move to previous buffer.
-nnoremap <C-\> :bprevious<CR>
+nnoremap <silent><C-\> :bprevious<CR>
 
 
 
 " Toggle paste mode from normal mode.
-nnoremap <silent> <LocalLeader>p :set paste!<CR>
+nnoremap <silent><LocalLeader>p :set paste!<CR>
 " Toggle cursor column
-nnoremap <silent> <LocalLeader>c :set cursorcolumn!<CR>
+nnoremap <silent><LocalLeader>c :set cursorcolumn!<CR>
 " Clean highlights with <LEADER>/
-nnoremap <silent> <leader>/ :noh<cr>
+nnoremap <silent><leader>/ :noh<cr>
 
 " Search mappings: These will make it so that going to the next one in a
 " search will center on the line it's found in.

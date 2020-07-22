@@ -67,9 +67,50 @@ if type rg &> /dev/null; then
   export FZF_DEFAULT_COMMAND='rg --files'
   export FZF_DEFAULT_OPTS='-m --height 50% --border'
 fi
-
+# Aliases
+alias la='ls -lah --color=auto'
+alias lh='ls -lh --color=auto'
+alias ls='ls --color=auto'
+alias l='ls --color=auto'
+alias grep='grep --color=auto'
+alias fd=fdfind
 export MOLECULE_DISTRO=debian10
 export ANSIBLE_VAULT_PASSWORD_FILE=~/.vault_pass.txt
-source /usr/share/doc/fzf/examples/completion.zsh
-source /usr/share/doc/fzf/examples/key-bindings.zsh
+export GOPATH=~/.local/share/go
+export PATH=$PATH:$GOPATH/bin
+export PATH=$PATH:~/.cargo/bin
+
+# Keybindings for substring search plugin. Maps up and down arrows.
+bindkey -M main '^[OA' history-substring-search-up
+bindkey -M main '^[OB' history-substring-search-down
+bindkey -M main '^[[A' history-substring-search-up
+bindkey -M main '^[[B' history-substring-search-up
+#
+# # Keybindings for autosuggestions plugin
+bindkey '^ ' autosuggest-accept
+bindkey '^f' autosuggest-accept
+#
+# # Gray color for autosuggestions
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=247'
+#
+# # fzf settings. Uses sharkdp/fd for a faster alternative to `find`.
+FZF_CTRL_T_COMMAND='fd --type f --hidden --exclude .git --exclude .cache'
+FZF_ALT_C_COMMAND='fd --type d --hidden --exclude .git'
+#
+ZSH_THEME="gruvbox"
+# Load plugins
+export ZPLUG_HOME=~/.local/share/zsh/zplug
+source $ZPLUG_HOME/init.zsh
+zplug "woefe/wbase.zsh"
+zplug "woefe/git-prompt.zsh", use:"{git-prompt.zsh,examples/wprompt.zsh}"
+zplug "junegunn/fzf", use:"shell/*.zsh"
+zplug "junegunn/fzf-bin", from:gh-r, as:command, rename-to:fzf,
+# use:"*linux*amd64*"
+zplug "sharkdp/fd", from:gh-r, as:command, rename-to:fd,
+# use:"*x86_64-unknown-linux-gnu.tar.gz"
+zplug "zsh-users/zsh-completions"
+zplug "zsh-users/zsh-autosuggestions"
+zplug "zsh-users/zsh-syntax-highlighting", defer:2
+zplug "zsh-users/zsh-history-substring-search", defer:3
+zplug load
 

@@ -29,6 +29,7 @@ function! StartifyEntryFormat()
 let g:startify_bookmarks = [
             \ { 'i': '~/.config/nvim/init.vim' },
             \ { 'z': '~/.config/zsh/.zshrc' },
+            \ { 'n': '~/Projects/ReadID/serverconfiguration/ansible/new_infrastructure/site.yml' },
             \ ]
 
 let g:startify_enable_special = 0

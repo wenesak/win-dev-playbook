@@ -90,6 +90,9 @@
       - maven
       - yarn
       - logstash
+      - fd-find
+      - golang
+      - cargo
       state: latest
   - name: Uninstall packages
     apt:
