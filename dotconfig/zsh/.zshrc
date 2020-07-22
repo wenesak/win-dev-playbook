@@ -8,20 +8,6 @@ prompt adam1
 # Use vi keybindings.
 bindkey -v
 
-# Keep 1000 lines of history within the shell and save it to ~/.zsh_history:
-export HISTFILESIZE=1000000000
-export HISTSIZE=1000000000
-export SAVEHIST=1000000000
-export HISTFILE="${HOME}/.local/share/zsh/history"
-# Record history at once and not after shell exit
-setopt INC_APPEND_HISTORY
-export HISTTIMEFORMAT="[%F %T] "
-# Record timestamps in history
-setopt EXTENDED_HISTORY
-
-# Use modern completion system
-autoload -Uz compinit
-compinit -d "{HOME}/.local/share/zsh/zcompdump"
 
 zstyle ':completion:*' auto-description 'specify: %d'
 zstyle ':completion:*' completer _expand _complete _correct _approximate
@@ -113,4 +99,18 @@ zplug "zsh-users/zsh-autosuggestions"
 zplug "zsh-users/zsh-syntax-highlighting", defer:2
 zplug "zsh-users/zsh-history-substring-search", defer:3
 zplug load
+# Keep 1000 lines of history within the shell and save it to ~/.zsh_history:
+export HISTFILESIZE=1000000000
+export HISTSIZE=1000000000
+export SAVEHIST=1000000000
+export HISTFILE="${HOME}/.local/share/zsh/history"
+# Record history at once and not after shell exit
+setopt INC_APPEND_HISTORY
+export HISTTIMEFORMAT="[%F %T] "
+# Record timestamps in history
+setopt EXTENDED_HISTORY
+
+# Use modern completion system
+autoload -Uz compinit
+compinit -d "{HOME}/.local/share/zsh/zcompdump"
 
