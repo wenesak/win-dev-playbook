@@ -10,8 +10,9 @@
       state: latest
   - name: Install git
     win_chocolatey:
-      name: 
+      name:
        - git
        - googlechrome
        - firefox
+       - python3
       state: latest

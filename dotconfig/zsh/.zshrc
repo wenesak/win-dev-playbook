@@ -1,10 +1,3 @@
-# Set up the prompt
-
-autoload -Uz promptinit
-promptinit
-prompt adam1
-
-
 # Use vi keybindings.
 bindkey -v
 
