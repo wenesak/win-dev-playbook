@@ -254,9 +254,11 @@ endif
 
 set spelllang=en_gb,nl
 set spellfile=~/.config/nvim/spell/en.utf-8.add
+set complete+=kspell
+autocmd BufRead,BufNewFile *.md setlocal spell
+
 set laststatus=2
-scriptencoding utf-8
-" set leader key
+" set leader keys
 let g:mapleader = "\<Space>"
 let g:localleader = "\\"
 
