@@ -75,21 +75,6 @@ if has('nvim')
   nnoremap <Leader>= <C-w>=
 endif
 
-
-
-" Tabs. This breaks <CONTROL><I>, I know.
-" Open new tab with Shift T.
-nnoremap <Tab> gt
-nnoremap <S-Tab> gT
-nnoremap <silent><M-t> :tabnew<CR>
-
-" Control space wil move to next buffer.
-nnoremap <silent><M-\> :bnext<CR>
-" Shift space will move to previous buffer.
-nnoremap <silent><C-\> :bprevious<CR>
-
-
-
 " Toggle paste mode from normal mode.
 nnoremap <silent><LocalLeader>p :set paste!<CR>
 " Toggle cursor column

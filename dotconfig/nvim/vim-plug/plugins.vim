@@ -8,14 +8,15 @@ if empty(glob('~/.local/share/nvim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.local/share/nvim/autoload/plugged')
+    Plug 'ryanoasis/vim-devicons'
     " Better Syntax Support
     "Plug 'sheerun/vim-polyglot'
     " File Explorer
     Plug 'scrooloose/NERDTree'
-    " Auto pairs for '(' '[' '{'
-    "Plug 'jiangmiao/auto-pairs'
     " Theme
     Plug 'morhetz/gruvbox'
+    " Manage tabs and buffers. Shows buffers and tabs nicely in the top bar.
+    Plug 'bagrat/vim-buffet'
     " Bottom bar with Git info and more
     Plug 'vim-airline/vim-airline'
     " Themes for bottom bar, gruvbox compatible theme available
@@ -33,15 +34,11 @@ call plug#begin('~/.local/share/nvim/autoload/plugged')
     Plug 'unblevable/quick-scope'
     Plug 'airblade/vim-gitgutter'
     Plug 'junegunn/fzf'
+    "align around a certain character .e.g. pipe in markdown tables with ga| 
     Plug 'junegunn/vim-easy-align'
     Plug 'rhysd/vim-grammarous'
     Plug 'voldikss/vim-floaterm'
-    Plug 'ryanoasis/vim-devicons'
     Plug 'mhinz/vim-startify'
-    " Distraction free writing
     " Intellisense
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
-    " Pressing leader and wait a moment will popup a menu with all the leader keys
-    " you forgot
-    Plug 'liuchengxu/vim-which-key', { 'on': ['WhichKey', 'WhichKey!'] }
 call plug#end()
