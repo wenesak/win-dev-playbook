@@ -12,20 +12,15 @@ nnoremap <M-u> viwU<Esc>
 nnoremap <C-s> :w<CR>
 " Alternate way to quit
 nnoremap <C-Q> :wq!<CR>
-" <TAB>: completion.
-inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 
 noremap <silent><Tab> :bn<CR>
 noremap <silent><S-Tab> :bp<CR>
-noremap <Leader><Tab> :Bw<CR>
-noremap <Leader><S-Tab> :Bw!<CR>
+noremap <silent><Leader><Tab> :bd<CR>
+noremap <silent><Leader><S-Tab> :bd!<CR>
 
 nnoremap <silent><M-t> :tabnew<CR>
 noremap <silent><C-t> :tabnew split<CR>
 
-" Alt \ and Control \ move between tabs
-nnoremap <silent><M-\> gt
-nnoremap <silent><C-\> gT
 " Better tabbing
 vnoremap < <gv
 vnoremap > >gv

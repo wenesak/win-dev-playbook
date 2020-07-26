@@ -2,7 +2,7 @@
 let g:airline_theme = 'gruvbox'
 
 " Always show tabs
-set showtabline=2
+set showtabline=1
 
 " We don't need to see things like -- INSERT -- anymore since this is shown in the airline bar.
 set noshowmode
