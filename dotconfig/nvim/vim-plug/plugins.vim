@@ -31,8 +31,6 @@ call plug#begin('~/.local/share/nvim/autoload/plugged')
     Plug 'tpope/vim-commentary'
     " Highlight f,t,F and T targets.
     Plug 'unblevable/quick-scope'
-    " like f,t,F,T but with s and S followed by 2 characters, and beyound lines.
-    Plug 'justinmk/vim-sneak'
     Plug 'airblade/vim-gitgutter'
     Plug 'junegunn/fzf'
     Plug 'junegunn/vim-easy-align'
