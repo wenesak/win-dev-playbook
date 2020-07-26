@@ -1,10 +1,10 @@
-noremap <Tab> :bn<CR>
-noremap <S-Tab> :bp<CR>
+noremap <silent><Tab> :bn<CR>
+noremap <silent><S-Tab> :bp<CR>
 noremap <Leader><Tab> :Bw<CR>
 noremap <Leader><S-Tab> :Bw!<CR>
 
 nnoremap <silent><M-t> :tabnew<CR>
-noremap <C-t> :tabnew split<CR>
+noremap <silent><C-t> :tabnew split<CR>
 
 " Alt \ and Control \ move between tabs
 nnoremap <silent><M-\> gt
