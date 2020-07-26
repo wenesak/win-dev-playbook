@@ -15,8 +15,6 @@ call plug#begin('~/.local/share/nvim/autoload/plugged')
     Plug 'scrooloose/NERDTree'
     " Theme
     Plug 'morhetz/gruvbox'
-    " Manage tabs and buffers. Shows buffers and tabs nicely in the top bar.
-    Plug 'bagrat/vim-buffet'
     " Bottom bar with Git info and more
     Plug 'vim-airline/vim-airline'
     " Themes for bottom bar, gruvbox compatible theme available
