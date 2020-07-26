@@ -19,24 +19,6 @@ inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 vnoremap < <gv
 vnoremap > >gv
 
-" Better window navigation
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
-
-" Terminal window navigation
-tnoremap <C-h> <C-\><C-N><C-w>h
-tnoremap <C-j> <C-\><C-N><C-w>j
-tnoremap <C-k> <C-\><C-N><C-w>k
-tnoremap <C-l> <C-\><C-N><C-w>l
-inoremap <C-h> <C-\><C-N><C-w>h
-inoremap <C-j> <C-\><C-N><C-w>j
-inoremap <C-k> <C-\><C-N><C-w>k
- inoremap <C-l> <C-\><C-N><C-w>l
-tnoremap <Esc> <C-\><C-n>
-" Make all views about the same size
-nnoremap <Leader>= <C-w>=
 
 " Insert below indented
 nnoremap <Leader>o o<Esc>^Da
@@ -79,16 +61,24 @@ if has('nvim')
   " Open horizontal and vertical split with leader h and leader v.
   noremap <Leader>h :<C-u>split<CR>
   noremap <Leader>v :<C-u>vsplit<CR>
-  " Resize splits to equal size
-  nnoremap <leader>= <c-w>=
+  " Terminal window navigation
+  tnoremap <C-h> <C-\><C-N><C-w>h
+  tnoremap <C-j> <C-\><C-N><C-w>j
+  tnoremap <C-k> <C-\><C-N><C-w>k
+  tnoremap <C-l> <C-\><C-N><C-w>l
+  inoremap <C-h> <C-\><C-N><C-w>h
+  inoremap <C-j> <C-\><C-N><C-w>j
+  inoremap <C-k> <C-\><C-N><C-w>k
+  inoremap <C-l> <C-\><C-N><C-w>l
+  tnoremap <Esc> <C-\><C-n>
+  " Make all views about the same size
+  nnoremap <Leader>= <C-w>=
 endif
 
 
 
-"" 
-"" Tabs. This breaks <CONTROL><I>, I know.
-"" Open new tab with Shift T.
-""
+" Tabs. This breaks <CONTROL><I>, I know.
+" Open new tab with Shift T.
 nnoremap <Tab> gt
 nnoremap <S-Tab> gT
 nnoremap <silent><M-t> :tabnew<CR>
