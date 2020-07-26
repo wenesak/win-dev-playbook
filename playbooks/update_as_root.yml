@@ -93,6 +93,8 @@
       - fd-find
       - golang
       - cargo
+      - texlive-full
+      - pandoc
       state: latest
   - name: Uninstall packages
     apt:
