@@ -3,10 +3,6 @@ scriptencoding utf-8
 inoremap <expr> <C-j> ("\<C-n>")
 inoremap <expr> <C-k> ("\<C-p>")
 
-" Quicker to normal mode than escape.
-inoremap jk <Esc>
-inoremap kj <Esc>
-
 " Easy CAPS
 inoremap <M-u> <ESC>viwUi
 nnoremap <M-u> viwU<Esc>
