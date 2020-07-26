@@ -1,7 +1,4 @@
 scriptencoding utf-8
-" Better nav for omnicomplete
-inoremap <expr> <C-j> ("\<C-n>")
-inoremap <expr> <C-k> ("\<C-p>")
 
 " Easy CAPS
 inoremap <M-u> <ESC>viwUi
@@ -67,15 +64,15 @@ if has('nvim')
   noremap <Leader>h :<C-u>split<CR>
   noremap <Leader>v :<C-u>vsplit<CR>
   " Terminal window navigation
-  tnoremap <C-h> <C-\><C-N><C-w>h
-  tnoremap <C-j> <C-\><C-N><C-w>j
-  tnoremap <C-k> <C-\><C-N><C-w>k
-  tnoremap <C-l> <C-\><C-N><C-w>l
-  inoremap <C-h> <C-\><C-N><C-w>h
-  inoremap <C-j> <C-\><C-N><C-w>j
-  inoremap <C-k> <C-\><C-N><C-w>k
-  inoremap <C-l> <C-\><C-N><C-w>l
-  tnoremap <Esc> <C-\><C-n>
+"  tnoremap <C-h> <C-\><C-N><C-w>h
+"  tnoremap <C-j> <C-\><C-N><C-w>j
+"  tnoremap <C-k> <C-\><C-N><C-w>k
+"  tnoremap <C-l> <C-\><C-N><C-w>l
+"  inoremap <C-h> <C-\><C-N><C-w>h
+"  inoremap <C-j> <C-\><C-N><C-w>j
+"  inoremap <C-k> <C-\><C-N><C-w>k
+"  inoremap <C-l> <C-\><C-N><C-w>l
+"  tnoremap <Esc> <C-\><C-n>
   " Make all views about the same size
   nnoremap <Leader>= <C-w>=
 endif
@@ -103,6 +100,7 @@ cnoreabbrev WQ wq
 cnoreabbrev W w
 cnoreabbrev Q q
 cnoreabbrev Qall qall
+
 
 au! BufWritePost $MYVIMRC source %      " auto source when writing to init.vim alternatively you can run :source $MYVIMRC
 

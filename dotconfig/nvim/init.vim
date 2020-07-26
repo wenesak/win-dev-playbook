@@ -13,6 +13,7 @@ source $HOME/.config/nvim/plug-config/start-screen.vim
 source $HOME/.config/nvim/plug-config/floaterm.vim
 source $HOME/.config/nvim/plug-config/coc.vim
 source $HOME/.config/nvim/plug-config/fzf.vim
+source $HOME/.config/nvim/plug-config/vim-text-obj-quote.vim
 
 source $HOME/.config/nvim/general/custom.vim
 source $HOME/.config/nvim/keys/mappings.vim
