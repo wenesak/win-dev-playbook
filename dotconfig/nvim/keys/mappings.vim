@@ -25,7 +25,6 @@ noremap <silent><C-t> :tabnew split<CR>
 vnoremap < <gv
 vnoremap > >gv
 
-
 " Insert below indented
 nnoremap <Leader>o o<Esc>^Da
 " Insert above  indented
