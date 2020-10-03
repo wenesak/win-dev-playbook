@@ -63,7 +63,7 @@
       - rsync
       - ssh
       - git
-      - ctags
+      - universal-ctags
       - cscope
       - neovim
       - tmux
