@@ -43,15 +43,35 @@ export ZPLUG_HOME=~/.local/share/zsh/zplug
 source $ZPLUG_HOME/init.zsh
 zplug "woefe/wbase.zsh"
 zplug "woefe/git-prompt.zsh", use:"{git-prompt.zsh,examples/wprompt.zsh}"
+zplug "zsh-users/zsh-history-substring-search"
+zplug "Jxck/dotfiles", as:command, use:"bin/{histuniq,color}"
+zplug "plugins/git",   from:oh-my-zsh
 zplug "junegunn/fzf", use:"shell/*.zsh"
 zplug "junegunn/fzf-bin", from:gh-r, as:command, rename-to:fzf,
 # use:"*linux*amd64*"
+# Group dependencies
+# Load "emoji-cli" if "jq" is installed in this example
+zplug "stedolan/jq", \
+    from:gh-r, \
+    as:command, \
+    rename-to:jq
+zplug "b4b4r07/emoji-cli", \
+    on:"stedolan/jq"
+zplug "zsh-users/zsh-syntax-highlighting", defer:2
+
 zplug "sharkdp/fd", from:gh-r, as:command, rename-to:fd,
 # use:"*x86_64-unknown-linux-gnu.tar.gz"
 zplug "zsh-users/zsh-completions"
 zplug "zsh-users/zsh-autosuggestions"
 zplug "zsh-users/zsh-syntax-highlighting", defer:2
 zplug "zsh-users/zsh-history-substring-search", defer:3
+# Install plugins if there are plugins that have not been installed
+if ! zplug check --verbose; then
+    printf "Install? [y/N]: "
+    if read -q; then
+        echo; zplug install
+    fi
+fi
 zplug load
 # Aliases
 alias la='ls -lah --color=auto'
@@ -110,3 +130,4 @@ dirstack_file=${dirstack_file:-${HOME}/.local/share/zsh/zdirs}
 autoload -Uz compinit
 compinit -d "{HOME}/.local/share/zsh/zcompdump"
 
+[[ /usr/local/bin/kubectl ]] && source <(kubectl completion zsh)

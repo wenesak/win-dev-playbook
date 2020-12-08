@@ -1,1 +1,1 @@
-ZDOTDIR="${${(%):-%x}:P:h}"
+ZDOTDIR=/home/kruse/.config/zsh
