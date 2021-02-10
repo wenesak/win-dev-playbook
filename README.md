@@ -23,4 +23,17 @@ Install ansible 2.10 and higer  with:
 pip install ansible-base
 pip install ansible
 ```
+There is no need to do this as root!
+Ansible will be installed in a hidden directory. It's bin directory should be
+added to your path in your shell configuration, e.g. .bashrc or .zshrc or
+whatever shell you fancy. Changes will only be active if your do a `source
+.bashrc`, `source .zshrc` or restart your shell.
+
+Check with:
+
+```
+which ansible
+```
+
+
 
